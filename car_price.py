@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 # import tensorflow as tf 
-from sklearn.preprocessing import MinMaxScaler
+# from sklearn.preprocessing import MinMaxScaler
 
 # import matplotlib.pyplot as plt
 # import matplotlib
@@ -11,7 +11,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 def main():
     st.title('조건에 따른 자동차 구매 금액 예측하기.')
-    df = pd.read_csv('data/Car_Purchasing_Data.csv')
+    df = pd.read_csv('data\Car_Purchasing_Data.csv')
     st.dataframe(df)
     if st.button('최고 연봉자 보기'):
         st.dataframe(df.loc[df['Annual Salary']==df['Annual Salary'].max(),])
@@ -26,11 +26,11 @@ def main():
     Credit_Card_Debt = st.number_input('카드값을 입력해주세요')
     Net_Worth = st.number_input('총 재산을 달러로 입력해 주세요')
 
-    new_data = np.array([gender, Age, Annual_Salary, Credit_Card_Debt, Net_Worth])
-    new_data=new_data.reshape(1,-1)
-    st.write(new_data)
+    # new_data = np.array([gender, Age, Annual_Salary, Credit_Card_Debt, Net_Worth])
+    # new_data=new_data.reshape(1,-1)
+    # st.write(new_data)
 
-    new_data_scaled = sc.transform(new_data)
+    # new_data_scaled = sc.transform(new_data)
 
-    model = tf.keras.models.load_model("C:\Users\5-17\OneDrive\데이터분석\streamlit\github\streamlit-image-app\data\Car_purchase_model.h5")
-    prediction = prediction_result(model, img)
+    # model = tf.keras.models.load_model("\Car_purchase_model.h5")
+    # prediction = prediction_result(model, img)
