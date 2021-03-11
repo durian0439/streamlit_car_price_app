@@ -12,6 +12,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.callbacks import CSVLogger
 import pickle
 import streamlit as st
+import string as str
 
 
 def run_eda_app() :
@@ -61,5 +62,20 @@ def run_eda_app() :
         st.write('컬럼이 없습니다.')
 
 
+    # 컬럼을 하나만 선택하면, 해당컬럼의 min/max에 해당하는 사람의 데이터를 화면에 표출
 
+    corr_columns = car_df.describe().columns.values # describe를 사용하면 숫자데이터만 나타내기에 사용.
+    multi_corr_columns=st.selectbox('최대 최소값을 보기위해 컬럼을 선택해주세요', corr_columns)
+    if len(multi_corr_columns) != 0:
+        st.dataframe(car_df[car_df[multi_corr_columns]==car_df[multi_corr_columns].min()])
+        st.dataframe(car_df[car_df[multi_corr_columns]==car_df[multi_corr_columns].max()])
+    else:
+        st.write('컬럼이 없습니다.')
 
+    # 고객 이름검색 툴 만들기
+    
+    word=st.text_input('검색어를 입력하세요')
+    word = word.lower()
+    result = car_df.loc[car_df['Customer Name'].str.contains(word, case = False, )] #대소문자 상관없이 찾으라
+
+    st.dataframe(result)
